@@ -1,0 +1,35 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .center {
+    text-align: center;
+    min-width: 60vw;
+    h1 {
+      color: #ffffff;
+      font-size: 70px;
+    }
+    .register-form {
+      font-size: 20px;
+      color: #ffffff;
+
+      :global(.ant-form-item-required) {
+        color: #ffffff;
+        font-size: 30px;
+      }
+      :global(.ant-input) {
+        height: 40px;
+      }
+      .register-form-button {
+        width: 150px;
+        height: 60px;
+        color: rgba(81, 61, 106, 0.986);
+        font-size: 30px;
+      }
+      p {
+        color: #ffffff;
+      }
+    }
+  }
+}
