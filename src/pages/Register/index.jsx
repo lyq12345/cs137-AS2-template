@@ -1,13 +1,40 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
+import {message as messageInfo} from "antd";
 import styles from './register.less';
+import {RegisterReg} from '../../api/public'
 
 // const { UserOutlined, LockOutlined } = icons;
 
 const Register = () => {
   const [form] = Form.useForm();
+
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    console.log('Success:', values);
+    const email = values["username"];
+    const pwd = values["password"];
+    const repwd = values["re-password"]
+    if(!email || !pwd || !repwd) {
+      return;
+    }
+
+    if(pwd !== repwd) {
+      messageInfo.error("Two passwords do not match!")
+      return;
+    }
+
+    RegisterReg({email:email, password:pwd}).then(({resultCode, message}) => {
+      if(resultCode === 110) {
+        messageInfo.success(message);
+      }else {
+        messageInfo.error(message);
+      }
+    })
+    
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
   };
 
   return (
@@ -19,6 +46,7 @@ const Register = () => {
           className={styles['register-form']}
           layout="vertical"
           onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
           <Form.Item
             label="Email"
@@ -52,12 +80,12 @@ const Register = () => {
             />
           </Form.Item>
           <Form.Item
-            name="password"
+            name="re-password"
             label="Re-enter Password"
             rules={[
               {
                 required: true,
-                message: 'Please input your Password!',
+                message: 'Please re-enter your Password!',
               },
             ]}
           >

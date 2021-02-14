@@ -1,18 +1,28 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message as messageInfo } from 'antd';
 import styles from './login.less';
 import { history } from 'umi';
+import {LoginIn} from '../../api/public';
+import Idm from "../../services/Idm";
 
 // const { UserOutlined, LockOutlined } = icons;
 
 const Login = () => {
   // const [form] = Form.useForm();
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
-
-  const handleLogin = () => {
-    history.push('./home');
+    const email = values["username"];
+    const password = values["password"]
+    LoginIn({email,password}).then((res) => {
+      if(res.resultCode === 120) {
+        messageInfo.success(res.message);
+        localStorage.setItem("email", JSON.stringify(email));
+        localStorage.setItem("session_id", JSON.stringify(res.session_id));
+        history.push('./search');
+      }else {
+        messageInfo.error(res.message);
+      }
+      
+    })
   };
 
   return (
@@ -58,13 +68,13 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button onClick={handleLogin} htmlType="submit" className={styles['login-form-button']}>
+            <Button htmlType="submit" className={styles['login-form-button']}>
               Log in
             </Button>
           </Form.Item>
           <p>
             <span>Don't have an account? Sign up </span>
-            <a href="./login" style={{ textDecoration: 'underline', color: '#ffffff' }}>
+            <a href="./register" style={{ textDecoration: 'underline', color: '#ffffff' }}>
               here
             </a>
             .

@@ -68,12 +68,20 @@ request.interceptors.request.use((url, options) => {
   const Authorization = sessionStorage.getItem('Authorization');
   let URL;
   let headers = null;
-  if (options.prefixType === 'sso') {
-    URL = `${REACT_APP_SSO_API}${url}`;
-  } else {
-    // eslint-disable-next-line no-undef
-    URL = `${REACT_APP_BASIC_API}${url}`;
+  switch (options.prefixType) {
+    case 'idm':
+      URL = `/idm${url}`;
+      break;
+    default:
+      // eslint-disable-next-line no-undef
+      URL = `${REACT_APP_BASIC_API}${url}`;
   }
+  // if (options.prefixType === 'sso') {
+  //   URL = `${REACT_APP_SSO_API}${url}`;
+  // } else {
+  //   // eslint-disable-next-line no-undef
+  //   URL = `${REACT_APP_BASIC_API}${url}`;
+  // }
   if (Authorization) {
     headers = {
       Authorization,
@@ -94,8 +102,8 @@ request.interceptors.response.use(async (response) => {
   if (contentType && contentType.indexOf('json') !== -1) {
     const data = await response.clone().json();
     // 异常处理
-    const { success = false, message, errMsg } = data;
-    if (!success) {
+    const { resultCode, message, errMsg } = data;
+    if (!resultCode) {
       notification.error({
         message: '提示',
         description: message || errMsg || '网络连接失败',

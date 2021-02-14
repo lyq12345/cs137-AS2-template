@@ -27,5 +27,10 @@ module.exports = {
       name: '主页',
       component: './Home',
     },
+    {
+      path: '/search',
+      name: '搜索页',
+      component: './Search',
+    },
   ],
 };

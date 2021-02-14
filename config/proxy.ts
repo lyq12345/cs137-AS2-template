@@ -9,29 +9,31 @@ export default {
   dev: {
     // 当前应用
     '/cs122b-fe-temp-api': {
-      target: 'http://xxxxx/',
+      target: 'http://localhost:12345/api/movies/',
       changeOrigin: true,
       pathRewrite: { '^/cs122b-fe-temp-api': '' },
     },
-    // sso接口转发
-    '/sso-api': {
-      target: 'http://sso-dev.yst.com.cn/sso/',
+    // idm
+    '/idm': {
+      target: 'http://localhost:2954/api/idm/',
       changeOrigin: true,
-      pathRewrite: { '^/sso-api': '' },
+      pathRewrite: { '^/idm': '' },
     },
     
   },
   test: {
     '/cs122b-fe-temp-api': {
-      target: 'http://xxxxx/',
+      target: 'http://localhost:12345/api/movies/',
       changeOrigin: true,
       pathRewrite: { '^/cs122b-fe-temp-api': '' },
     },
-    '/sso-api': {
-      target: 'http://sso-test.yst.com.cn/sso/',
+    // idm
+    '/idm': {
+      target: 'http://localhost:2954/api/idm/',
       changeOrigin: true,
-      pathRewrite: { '^/sso-api': '' },
+      pathRewrite: { '^/idm': '' },
     },
+    
     
   },
 };
