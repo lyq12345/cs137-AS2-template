@@ -1,12 +1,14 @@
 .bg-container {
+  min-width: 1200px;
+  background-color: rgba(81, 61, 106, 0.986);
+  background-position: top 65px center;
+
   .top-container {
     height: 70px;
     display: flex;
-    position:fixed;
-    z-index: 1;
-    width: 100%;
-    top: 0px;
-    left: 0px;
+    position: sticky;
+    z-index: 20;
+    top: 0;
     justify-content: space-between;
     align-items: center;
     background-color: rgb(229, 231, 233);
@@ -25,11 +27,20 @@
     }
   }
 
-  .center-container {
-    display: block;
-    min-height: 120vh;
+  .content-container {
+    padding-top: 40px;
+    min-height: 100vh;
     box-shadow: inset 0px 0px 30px 9px #000000;
-    background-color: rgba(81, 61, 106, 0.986);
     color: #ffffff;
+
+    .content {
+      width: 1200px;
+      margin: 0 auto;
+
+      .center {
+        position: relative;
+        color: #ffffff;
+      }
+    }
   }
 }

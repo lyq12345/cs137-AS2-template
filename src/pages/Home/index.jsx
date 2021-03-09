@@ -6,6 +6,7 @@ import Poster2 from '../../../public/poster2.jpg';
 import Poster3 from '../../../public/poster3.jpg';
 import { Card, Col, Row } from 'antd';
 import MovieCard from '../../components/MovieCard';
+import SearchBar from '../Search/components/SearchBar';
 
 const cardList = [
   {
@@ -24,6 +25,9 @@ const cardList = [
 const Index = () => {
   return (
     <div className={styles['home-bkg']}>
+      {/* <div className={styles['search-bar']}>
+        <SearchBar />
+      </div> */}
       <div className={styles['center']}>
         <div className={styles['main-title']}>
           <img src={Logo} />
@@ -33,9 +37,9 @@ const Index = () => {
           <span>Check out some movies!</span>
         </div>
         <div className={styles['card-list']}>
-          <Row gutter={16}>
+          <Row gutter={2}>
             {cardList.map((item) => (
-              <Col span={8}>
+              <Col span={8} className={styles['card-col']}>
                 <MovieCard title={item.title} poster={item.poster} />
               </Col>
             ))}

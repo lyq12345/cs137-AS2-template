@@ -17,7 +17,7 @@ module.exports = {
       routes: [
         {
           path: '/',
-          redirect: '/login',
+          redirect: '/Login',
         },
         {
           path: '/welcome',

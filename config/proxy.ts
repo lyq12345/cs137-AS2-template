@@ -9,31 +9,28 @@ export default {
   dev: {
     // 当前应用
     '/cs122b-fe-temp-api': {
-      target: 'http://localhost:12345/api/movies/',
+      target: 'http://localhost:12345/api/g/',
       changeOrigin: true,
       pathRewrite: { '^/cs122b-fe-temp-api': '' },
     },
     // idm
-    '/idm': {
-      target: 'http://localhost:2954/api/idm/',
-      changeOrigin: true,
-      pathRewrite: { '^/idm': '' },
-    },
-    
+    // '/idm': {
+    //   target: 'http://localhost:12346/api/idm/',
+    //   changeOrigin: true,
+    //   pathRewrite: { '^/idm': '' },
+    // },
   },
   test: {
     '/cs122b-fe-temp-api': {
-      target: 'http://localhost:12345/api/movies/',
+      target: 'http://localhost:12345/api/g/',
       changeOrigin: true,
       pathRewrite: { '^/cs122b-fe-temp-api': '' },
     },
     // idm
-    '/idm': {
-      target: 'http://localhost:2954/api/idm/',
-      changeOrigin: true,
-      pathRewrite: { '^/idm': '' },
-    },
-    
-    
+    // '/idm': {
+    //   target: 'http://localhost:12346/api/idm/',
+    //   changeOrigin: true,
+    //   pathRewrite: { '^/idm': '' },
+    // },
   },
 };

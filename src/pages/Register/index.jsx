@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
-import {message as messageInfo} from "antd";
+import { message as messageInfo } from 'antd';
 import styles from './register.less';
-import {RegisterReg} from '../../api/public'
+import { RegisterReg } from '../../api/idm';
 
 // const { UserOutlined, LockOutlined } = icons;
 
@@ -11,26 +11,25 @@ const Register = () => {
 
   const onFinish = (values) => {
     console.log('Success:', values);
-    const email = values["username"];
-    const pwd = values["password"];
-    const repwd = values["re-password"]
-    if(!email || !pwd || !repwd) {
+    const email = values['username'];
+    const pwd = values['password'];
+    const repwd = values['re-password'];
+    if (!email || !pwd || !repwd) {
       return;
     }
 
-    if(pwd !== repwd) {
-      messageInfo.error("Two passwords do not match!")
+    if (pwd !== repwd) {
+      messageInfo.error('Two passwords do not match!');
       return;
     }
 
-    RegisterReg({email:email, password:pwd}).then(({resultCode, message}) => {
-      if(resultCode === 110) {
+    RegisterReg({ email: email, password: pwd }).then(({ resultCode, message }) => {
+      if (resultCode === 110) {
         messageInfo.success(message);
-      }else {
+      } else {
         messageInfo.error(message);
       }
-    })
-    
+    });
   };
 
   const onFinishFailed = (errorInfo) => {

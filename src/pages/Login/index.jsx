@@ -1,28 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Input, Button, Checkbox, message as messageInfo } from 'antd';
 import styles from './login.less';
 import { history } from 'umi';
-import {LoginIn} from '../../api/public';
-import Idm from "../../services/Idm";
+import { LoginIn } from '../../api/idm';
+import { LoginContext, useUser } from '../../layouts/CommonLayout/store';
 
 // const { UserOutlined, LockOutlined } = icons;
 
 const Login = () => {
-  // const [form] = Form.useForm();
+  const { setLogin } = useContext(LoginContext);
+  const { session, setSession, email, setEmail } = useUser();
+
   const onFinish = (values) => {
-    const email = values["username"];
-    const password = values["password"]
-    LoginIn({email,password}).then((res) => {
-      if(res.resultCode === 120) {
+    const email = values['username'];
+    const password = values['password'];
+    LoginIn({ email, password }).then((res) => {
+      if (res.resultCode === 120) {
+        setLogin(true);
         messageInfo.success(res.message);
-        localStorage.setItem("email", JSON.stringify(email));
-        localStorage.setItem("session_id", JSON.stringify(res.session_id));
+        setSession(res.session_id);
+        setEmail(email);
         history.push('./search');
-      }else {
+      } else {
         messageInfo.error(res.message);
       }
-      
-    })
+    });
   };
 
   return (
