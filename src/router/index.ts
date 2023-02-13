@@ -5,7 +5,6 @@
  * @LastEditors: lyq
  * @Description:
  * @FilePath: /cs122b-fe-temp/src/router/index.ts
- * @可以输入预定的版权声明、个性签名、空行等
  */
 const { router: demoRouter } = require('./demo-router');
 
@@ -17,7 +16,7 @@ module.exports = {
       routes: [
         {
           path: '/',
-          redirect: '/Login',
+          redirect: '/search',
         },
         {
           path: '/welcome',
@@ -25,7 +24,7 @@ module.exports = {
           icon: 'smile',
           component: './Welcome',
         },
-        // 示例路由
+        // example routers
         ...demoRouter,
         {
           component: './404',

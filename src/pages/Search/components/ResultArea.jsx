@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Table, List, Pagination } from 'antd';
-import MovieCard from '@/components/MovieCard';
 import Poster1 from '@/../public/poster1.jpg';
+import ProductCard from '@/components/ProductCard';
+import { List } from 'antd';
+import React from 'react';
 
 const ResultArea = (props) => {
   return (
     <div style={{ marginTop: '150px' }}>
       <List
         grid={{ column: 5 }}
-        dataSource={props.movies}
+        dataSource={props.products}
         renderItem={(item) => (
           <List.Item>
-            <MovieCard movie={item} poster={Poster1} />
+            <ProductCard product={item} cover={Poster1} />
           </List.Item>
         )}
       />

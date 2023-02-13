@@ -1,12 +1,11 @@
+import { Col, Row } from 'antd';
 import React from 'react';
-import styles from './index.less';
 import Logo from '../../../public/logo.png';
 import Poster1 from '../../../public/poster1.jpg';
 import Poster2 from '../../../public/poster2.jpg';
 import Poster3 from '../../../public/poster3.jpg';
-import { Card, Col, Row } from 'antd';
-import MovieCard from '../../components/MovieCard';
-import SearchBar from '../Search/components/SearchBar';
+import ProductCard from '../../components/ProductCard';
+import styles from './index.less';
 
 const cardList = [
   {
@@ -28,7 +27,7 @@ const Index = () => {
       {/* <div className={styles['search-bar']}>
         <SearchBar />
       </div> */}
-      <div className={styles['center']}>
+      <div className={styles.center}>
         <div className={styles['main-title']}>
           <img src={Logo} />
           <span>FabFlix</span>
@@ -40,7 +39,7 @@ const Index = () => {
           <Row gutter={2}>
             {cardList.map((item) => (
               <Col span={8} className={styles['card-col']}>
-                <MovieCard title={item.title} poster={item.poster} />
+                <ProductCard title={item.title} poster={item.poster} />
               </Col>
             ))}
           </Row>

@@ -1,33 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'umi';
-import { Pagination, message as messageInfo, Row, Col, Button, Modal, InputNumber } from 'antd';
-import { GetMovie } from '@/api/movies';
-import { CartInsert } from '@/api/billing';
-import styles from './index.less';
 import Poster1 from '@/../public/poster1.jpg';
+import { CartInsert } from '@/api/billing';
+// import { GetMovie } from '@/api/movies';
+import { productDetailList } from '@/data/productDetail';
+import { Button, Col, InputNumber, message as messageInfo, Modal, Row } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'umi';
+import styles from './index.less';
 
-const MovieDetail = () => {
-  const { movieId } = useParams();
+const ProductDetail = () => {
+  const { productId } = useParams();
   const [detail, setDetail] = useState({});
   const [shown, setShown] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [confirmLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    GetMovie(movieId).then((res) => {
-      if (res.resultCode === 210) {
-        messageInfo.success(res.message);
-        setDetail(res.movie);
-      }
-    });
-  }, [movieId]);
+    const index = Number.parseInt(productId);
+    const detail = productDetailList[index];
+    setDetail(detail);
+    // GetMovie(movieId).then((res) => {
+    //   if (res.resultCode === 210) {
+    //     messageInfo.success(res.message);
+    //     setDetail(res.movie);
+    //   }
+    // });
+  }, [productId]);
 
   const handleOk = () => {
     setLoading(true);
     const params = {
       email: localStorage.getItem('email'),
       movie_id: detail.movie_id,
-      quantity: quantity,
+      quantity,
     };
     console.log(params);
     CartInsert(params)
@@ -68,34 +72,16 @@ const MovieDetail = () => {
       </Modal>
       <h1>
         <span>{detail?.title}</span>
-        <span style={{ marginLeft: '20px' }}> ({detail.year})</span>
+        <span style={{ marginLeft: '20px' }}> ({detail?.year})</span>
       </h1>
-      <div className={styles['article']}>
+      <div className={styles.article}>
         <Row>
           <Col span={6}>
             <img src={Poster1} />
           </Col>
           <Col span={12} style={{ paddingRight: '10px' }}>
             <div>
-              <p>Director: {detail?.director}</p>
-              <p>
-                Stuff:
-                {detail.people?.map((item, index, arr) => (
-                  <span>
-                    {item.name}
-                    {index !== arr.length - 1 ? ' / ' : null}
-                  </span>
-                ))}
-              </p>
-              <p>
-                Genre:{' '}
-                {detail.genres?.map((item, index, arr) => (
-                  <span>
-                    {item.name}
-                    {index !== arr.length - 1 ? ' / ' : null}
-                  </span>
-                ))}
-              </p>
+              <p>Director: {detail?.brand}</p>
               <p>Overview: {detail?.overview}</p>
             </div>
             <div>
@@ -119,4 +105,4 @@ const MovieDetail = () => {
   );
 };
 
-export default MovieDetail;
+export default ProductDetail;

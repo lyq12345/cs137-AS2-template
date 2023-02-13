@@ -8,21 +8,16 @@
  * @可以输入预定的版权声明、个性签名、空行等
  */
 
-import component from '@/locales/en-US/component';
-
-/**
- * TODO: 仅示例使用 建议删除或重命名
- */
 module.exports = {
   router: [
     {
       path: '/login',
-      name: '登录页',
+      name: 'login page',
       component: './Login',
     },
     {
       path: '/register',
-      name: '注册页',
+      name: 'registration page',
       component: './Register',
     },
     {
@@ -36,9 +31,9 @@ module.exports = {
       component: './Search',
     },
     {
-      path: '/detail/:movieId',
+      path: '/detail/:productId',
       name: '电影详情',
-      component: './MovieDetail',
+      component: './ProductDetail',
     },
     {
       path: '/cart',
